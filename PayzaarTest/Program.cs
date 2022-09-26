@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿/*
+* TODO:
+*	- refactor, find all the issues you can and fix them
+*	- change the code to follow clean architecture principles
+*	- apply design patterns where you think it is required
+*	- do not change the output
+*	- make sure the refactored code is testable (you are allowed to write a test or two as a PoC)
+*	- add comments, highlighting what you changed and what was the reason for change
+*/
 
-var allProducts = ProductUtils.ListAllProducts();
-ProductUtils.UpdateListOfAvailableProducts();
 
-if (ProductUtils.ProductsAvailableNow.Count() == 0)
+if (ProductUtils.ListAvailableProductsNow().Count() == 0)
     Console.WriteLine("There are no products available at this time of day");
 else
     ProductUtils.DisplayAvailableProducts();
@@ -21,16 +25,51 @@ public class Product
 
 public static class ProductUtils
 {
-    public static IEnumerable<Product> ProductsAvailableNow;
+    private static List<Product> ProductsAvailable;
 
     static ProductUtils()
     {
-        ProductsAvailableNow = new List<Product>();
+        ProductsAvailable = ListAllProducts();
     }
 
-    public static List<Product> ListAllProducts()
+    public static List<Product> GetListOfAllAvailableProducts() 
     {
-        List<Product> allProducts = new List<Product>
+        return ProductsAvailable.ToList();
+    }
+
+    public static bool AddProduct(Product prod) 
+    {
+        int currentCount = ProductsAvailable.Count();
+
+        ProductsAvailable.Add(prod);
+
+        if (ProductsAvailable.Count() == currentCount + 1)
+            return true;
+        else
+            return false;
+    }
+
+    public static bool RemoveProduct(string productName)
+    {
+        int index = ProductsAvailable.FindIndex(x => x.ProductName.Contains(productName));
+
+        if(ProductsAvailable.Count() == 0)
+            return false;
+
+        if (index != -1)
+        {
+            ProductsAvailable.RemoveAt(index);
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    private static List<Product> ListAllProducts()
+    {
+        return new List<Product>
         {
             new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
             new Product { ProductName = "Breakfast Burrito", ProductType = "Limited", StartHour = 8, EndHour = 12 },
@@ -38,21 +77,17 @@ public static class ProductUtils
             new Product { ProductName = "Chicken Sandwich", ProductType = "Limited", StartHour = 11, EndHour = 19 },
             new Product { ProductName = "Sam Adams Seasonal", ProductType = "Limited", StartHour = 17, EndHour = 23 }
         };
-
-        return allProducts;
     }
 
-    public static void UpdateListOfAvailableProducts()
+    public static List<Product> ListAvailableProductsNow()
     {
-        var productList = (List<Product>)ProductsAvailableNow;
+        List<Product> availableProductsNow = new List<Product>();
 
-        productList.Clear();
-
-        foreach (var product in ListAllProducts())
+        foreach (var product in ProductsAvailable)
         {
             if (product.ProductType == "AllDay" || (product.StartHour <= DateTime.Now.Hour && product.EndHour >= DateTime.Now.Hour))
             {
-                productList.Add(new Product
+                availableProductsNow.Add(new Product
                 {
                     ProductName = product.ProductName,
                     ProductType = product.ProductType,
@@ -61,13 +96,15 @@ public static class ProductUtils
                 });
             }
         }
+
+        return availableProductsNow;
     }
 
     public static void DisplayAvailableProducts()
     {
         Console.WriteLine("Products available current time of day:");
 
-        foreach (var pan in ProductsAvailableNow)
+        foreach (var pan in ListAvailableProductsNow())
         {
             string displayName = pan.ProductName;
 
