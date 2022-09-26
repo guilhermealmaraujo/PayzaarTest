@@ -1,4 +1,4 @@
-﻿/*
+/*
 * TODO:
 *	- refactor, find all the issues you can and fix them
 *	- change the code to follow clean architecture principles
