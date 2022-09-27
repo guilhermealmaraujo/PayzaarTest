@@ -91,11 +91,12 @@ namespace PayzaarTest_UnitTests
                 new Product { ProductName = "Product A", ProductType = "Limited", StartHour = 20, EndHour = 21 }
             };
 
-            shopTest.AddProduct(new Product { ProductName = "Product A", ProductType = "Limited", StartHour = 20, EndHour = 21 });
+            bool added = shopTest.AddProduct(new Product { ProductName = "Product A", ProductType = "Limited", StartHour = 20, EndHour = 21 });
             List<Product> availableListOfAll = shopTest.GetListOfAllAvailableProducts();
 
 
             Assert.AreEqual(availableListOfAll.Count(), 6);
+            Assert.IsTrue(added);
             MatchingListOfProductsName(expectedAll, availableListOfAll);
         }
 
@@ -116,6 +117,7 @@ namespace PayzaarTest_UnitTests
 
 
             Assert.IsTrue(removed);
+            Assert.AreEqual(availableListOfAll.Count(), 4);
             MatchingListOfProductsName(expectedAll, availableListOfAll);
         }
     }
