@@ -7,7 +7,7 @@
 
         public ProductStorage()
         {
-            ProductsAvailable = ListAllProducts();
+            ProductsAvailable = CreateInitialProducts();
             PUNow = null;
         }
 
@@ -46,7 +46,7 @@
             }
         }
 
-        private List<Product> ListAllProducts()
+        private List<Product> CreateInitialProducts()
         {
             return new List<Product>
             {
