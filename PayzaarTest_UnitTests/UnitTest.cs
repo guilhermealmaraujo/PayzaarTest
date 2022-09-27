@@ -22,8 +22,8 @@ namespace PayzaarTest_UnitTests
         public void ListingAvailableProductsNow_MockingDatetimeNow()
         {
             //Arrange
-            ProductStorage shopTest = new ProductStorage();
-            shopTest.SetMockingDateTimeNow(new DateTime(2022, 01, 01, 23, 00, 00));
+            ProductStorage storageTest = new ProductStorage();
+            storageTest.SetMockingDateTimeNow(new DateTime(2022, 01, 01, 23, 00, 00));
             List<Product> expectedProdList1 = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
@@ -31,7 +31,7 @@ namespace PayzaarTest_UnitTests
             };
 
             //Act
-            List<Product> availableList1 = shopTest.ListAvailableProductsNow();
+            List<Product> availableList1 = storageTest.ListAvailableProductsNow();
 
 
             //Assert
@@ -40,7 +40,7 @@ namespace PayzaarTest_UnitTests
 
 
             //Arrange
-            shopTest.SetMockingDateTimeNow(new DateTime(2022, 01, 01, 13, 00, 00));
+            storageTest.SetMockingDateTimeNow(new DateTime(2022, 01, 01, 13, 00, 00));
             List<Product> expectedProdList2 = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
@@ -49,7 +49,7 @@ namespace PayzaarTest_UnitTests
             };
 
             //Act
-            List<Product> availableList2 = shopTest.ListAvailableProductsNow();
+            List<Product> availableList2 = storageTest.ListAvailableProductsNow();
 
             //Assert
             Assert.AreEqual(availableList2.Count, 3);
@@ -60,7 +60,7 @@ namespace PayzaarTest_UnitTests
         [TestMethod]
         public void GettingListOfAllAvailableProducts() 
         {
-            ProductStorage shopTest = new ProductStorage();
+            ProductStorage storageTest = new ProductStorage();
             List<Product> expectedAll = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
@@ -71,7 +71,7 @@ namespace PayzaarTest_UnitTests
             };
 
 
-            List<Product> availableListOfAll = shopTest.GetListOfAllAvailableProducts();
+            List<Product> availableListOfAll = storageTest.GetListOfAllAvailableProducts();
 
             Assert.AreEqual(availableListOfAll.Count(), 5);
             MatchingListOfProductsName(expectedAll, availableListOfAll);
@@ -80,7 +80,7 @@ namespace PayzaarTest_UnitTests
         [TestMethod]
         public void AddingToListOfAllAvailableProducts()
         {
-            ProductStorage shopTest = new ProductStorage();
+            ProductStorage storageTest = new ProductStorage();
             List<Product> expectedAll = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
@@ -91,8 +91,8 @@ namespace PayzaarTest_UnitTests
                 new Product { ProductName = "Product A", ProductType = "Limited", StartHour = 20, EndHour = 21 }
             };
 
-            bool added = shopTest.AddProduct(new Product { ProductName = "Product A", ProductType = "Limited", StartHour = 20, EndHour = 21 });
-            List<Product> availableListOfAll = shopTest.GetListOfAllAvailableProducts();
+            bool added = storageTest.AddProduct(new Product { ProductName = "Product A", ProductType = "Limited", StartHour = 20, EndHour = 21 });
+            List<Product> availableListOfAll = storageTest.GetListOfAllAvailableProducts();
 
 
             Assert.AreEqual(availableListOfAll.Count(), 6);
@@ -103,7 +103,7 @@ namespace PayzaarTest_UnitTests
         [TestMethod]
         public void RemovingProductListOfAllAvailableProducts()
         {
-            ProductStorage shopTest = new ProductStorage();
+            ProductStorage storageTest = new ProductStorage();
             List<Product> expectedAll = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
@@ -112,8 +112,8 @@ namespace PayzaarTest_UnitTests
                 new Product { ProductName = "Chicken Sandwich", ProductType = "Limited", StartHour = 11, EndHour = 19 },
             };
 
-            bool removed = shopTest.RemoveProduct("Sam Adams Seasonal");
-            List<Product> availableListOfAll = shopTest.GetListOfAllAvailableProducts();
+            bool removed = storageTest.RemoveProduct("Sam Adams Seasonal");
+            List<Product> availableListOfAll = storageTest.GetListOfAllAvailableProducts();
 
 
             Assert.IsTrue(removed);
