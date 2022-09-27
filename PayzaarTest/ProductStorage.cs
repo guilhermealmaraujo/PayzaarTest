@@ -3,12 +3,12 @@
     public class ProductStorage
     {
         private List<Product> ProductsAvailable;
-        private DateTime? PUNow;
+        private DateTime? PSNow;
 
         public ProductStorage()
         {
             ProductsAvailable = CreateInitialProducts();
-            PUNow = null;
+            PSNow = null;
         }
 
         public List<Product> GetListOfAllAvailableProducts()
@@ -62,7 +62,7 @@
         {
             List<Product> availableProductsNow = new List<Product>();
 
-            DateTime dateTimeNow = PUNow?? DateTime.Now;
+            DateTime dateTimeNow = PSNow?? DateTime.Now;
 
             foreach (var product in ProductsAvailable)
             {
@@ -101,12 +101,12 @@
 
         public void SetMockingDateTimeNow(DateTime now)
         {
-            PUNow = now;
+            PSNow = now;
         }
 
         public void UnSetMockingDateTimeNow()
         {
-            PUNow = null;
+            PSNow = null;
         }
     }
 }
