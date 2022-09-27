@@ -2,8 +2,8 @@
 {
     public class ProductStorage
     {
-        private static List<Product> ProductsAvailable;
-        private static DateTime? PUNow;
+        private List<Product> ProductsAvailable;
+        private DateTime? PUNow;
 
         public ProductStorage()
         {
