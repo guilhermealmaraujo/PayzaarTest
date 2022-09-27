@@ -9,7 +9,7 @@
 */
 using PayzaarTest;
 
-ProductShop shopA = new ProductShop();
+ProductStorage shopA = new ProductStorage();
 
 if (shopA.ListAvailableProductsNow().Count() == 0)
     Console.WriteLine("There are no products available at this time of day");

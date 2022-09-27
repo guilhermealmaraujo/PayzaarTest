@@ -1,11 +1,11 @@
 ﻿namespace PayzaarTest
 {
-    public class ProductShop
+    public class ProductStorage
     {
         private static List<Product> ProductsAvailable;
         private static DateTime? PUNow;
 
-        public ProductShop()
+        public ProductStorage()
         {
             ProductsAvailable = ListAllProducts();
             PUNow = null;

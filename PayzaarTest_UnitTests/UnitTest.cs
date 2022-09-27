@@ -22,7 +22,7 @@ namespace PayzaarTest_UnitTests
         public void ListingAvailableProductsNow_MockingDatetimeNow()
         {
             //Arrange
-            ProductShop shopTest = new ProductShop();
+            ProductStorage shopTest = new ProductStorage();
             shopTest.SetMockingDateTimeNow(new DateTime(2022, 01, 01, 23, 00, 00));
             List<Product> expectedProdList1 = new List<Product>
             {
@@ -60,7 +60,7 @@ namespace PayzaarTest_UnitTests
         [TestMethod]
         public void GettingListOfAllAvailableProducts() 
         {
-            ProductShop shopTest = new ProductShop();
+            ProductStorage shopTest = new ProductStorage();
             List<Product> expectedAll = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
@@ -80,7 +80,7 @@ namespace PayzaarTest_UnitTests
         [TestMethod]
         public void AddingToListOfAllAvailableProducts()
         {
-            ProductShop shopTest = new ProductShop();
+            ProductStorage shopTest = new ProductStorage();
             List<Product> expectedAll = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
@@ -102,7 +102,7 @@ namespace PayzaarTest_UnitTests
         [TestMethod]
         public void RemovingProductListOfAllAvailableProducts()
         {
-            ProductShop shopTest = new ProductShop();
+            ProductStorage shopTest = new ProductStorage();
             List<Product> expectedAll = new List<Product>
             {
                 new Product { ProductName = "Orange Juice", ProductType = "AllDay" },
